@@ -1,0 +1,39 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.14-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.linkedinlearning'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '1.8'
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-batch'
+//	runtimeOnly 'com.h2database:h2'
+	implementation 'mysql:mysql-connector-java:8.0.29'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootRun{
+	args = [
+			//'--spring.config.additional-location=classpath:/config/base.properties'
+			'"item=sde" "run.date(date)=2023/01/01" "delivery.type=PREMIUM" "delivery.preferred.day=MONDAY" "flower.type=roses"'
+	]
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+
